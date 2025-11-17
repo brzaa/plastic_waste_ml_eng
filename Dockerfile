@@ -1,34 +1,28 @@
 # Multi-stage Dockerfile optimized for Raspberry Pi 5 (ARM64)
 # Target: Minimal image size with production-ready inference engine
+# Optimized for fast CI/CD builds (uses pip instead of Poetry)
 
 # ============================================================================
-# Stage 1: Builder - Compile dependencies
+# Stage 1: Builder - Install dependencies
 # ============================================================================
 FROM python:3.11-slim-bookworm AS builder
 
-# Install build dependencies
+# Install build dependencies (minimal set for faster builds)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
     gcc \
     g++ \
-    cmake \
-    git \
     && rm -rf /var/lib/apt/lists/*
-
-# Install Poetry
-RUN pip install --no-cache-dir poetry==1.8.0
 
 # Set working directory
 WORKDIR /app
 
-# Copy dependency files
-COPY pyproject.toml poetry.lock* ./
+# Copy requirements file (faster than Poetry under QEMU emulation)
+COPY requirements.txt ./
 
-# Configure Poetry (no virtualenv in Docker)
-RUN poetry config virtualenvs.create false
-
-# Install dependencies
-RUN poetry install --no-dev --no-interaction --no-ansi
+# Install Python dependencies
+# Use --no-cache-dir to reduce image size
+# Prefer binary wheels (much faster on ARM64 via QEMU)
+RUN pip install --no-cache-dir --prefer-binary -r requirements.txt
 
 # ============================================================================
 # Stage 2: Runtime - Minimal production image

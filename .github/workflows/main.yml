@@ -111,6 +111,7 @@ jobs:
     name: Docker Build (ARM64)
     runs-on: ubuntu-latest
     needs: test
+    timeout-minutes: 30  # Prevent indefinite hangs
 
     steps:
     - name: Checkout code
@@ -133,10 +134,14 @@ jobs:
         tags: bsort:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
+        build-args: |
+          BUILDKIT_INLINE_CACHE=1
+      timeout-minutes: 25
 
     - name: Test Docker image
       run: |
         docker run --rm --platform linux/arm64 bsort:latest bsort --version
+      timeout-minutes: 2
 
   # ============================================================================
   # Security Scanning
