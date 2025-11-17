@@ -353,8 +353,9 @@ def benchmark(
         raise typer.Exit(1)
 
     try:
-        from bsort.infer import ONNXInferenceEngine
         import numpy as np
+
+        from bsort.infer import ONNXInferenceEngine
 
         config = load_config(config_path)
 
@@ -419,7 +420,9 @@ def benchmark(
         if mean_time <= 10:
             console.print("[bold green]✓ EXCELLENT[/bold green] - Meets 5-10ms target!")
         elif mean_time <= 15:
-            console.print("[bold yellow]⚠ GOOD[/bold yellow] - Close to target, consider optimizations")
+            console.print(
+                "[bold yellow]⚠ GOOD[/bold yellow] - Close to target, consider optimizations"
+            )
         else:
             console.print("[bold red]✗ NEEDS IMPROVEMENT[/bold red]")
             console.print("Recommendations:")

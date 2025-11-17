@@ -5,7 +5,6 @@ from typing import List
 import cv2
 import numpy as np
 
-
 # Class colors (BGR format for OpenCV)
 CLASS_COLORS = {
     "light_blue": (255, 200, 100),  # Light blue
@@ -14,7 +13,9 @@ CLASS_COLORS = {
 }
 
 
-def draw_detections(image: np.ndarray, detections: List, class_names: List[str] = None) -> np.ndarray:
+def draw_detections(
+    image: np.ndarray, detections: List, class_names: List[str] = None
+) -> np.ndarray:
     """
     Draw bounding boxes and labels on image.
 

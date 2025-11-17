@@ -1,8 +1,9 @@
 """Tests for utility functions."""
 
-import numpy as np
 from dataclasses import dataclass
 from typing import Tuple
+
+import numpy as np
 
 from bsort.utils.visualization import draw_detections
 
@@ -51,8 +52,12 @@ def test_draw_detections_multiple():
     image = np.zeros((480, 640, 3), dtype=np.uint8)
 
     detections = [
-        MockDetection(class_id=0, confidence=0.95, bbox=(50, 50, 100, 100), class_name="light_blue"),
-        MockDetection(class_id=1, confidence=0.85, bbox=(200, 200, 300, 300), class_name="dark_blue"),
+        MockDetection(
+            class_id=0, confidence=0.95, bbox=(50, 50, 100, 100), class_name="light_blue"
+        ),
+        MockDetection(
+            class_id=1, confidence=0.85, bbox=(200, 200, 300, 300), class_name="dark_blue"
+        ),
         MockDetection(class_id=2, confidence=0.75, bbox=(400, 300, 500, 400), class_name="others"),
     ]
 

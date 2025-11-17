@@ -31,9 +31,7 @@ class Config:
         log_config = self._config.get("logging", {})
         logging.basicConfig(
             level=getattr(logging, log_config.get("level", "INFO")),
-            format=log_config.get(
-                "format", "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-            ),
+            format=log_config.get("format", "%(asctime)s - %(name)s - %(levelname)s - %(message)s"),
         )
 
     def get(self, key: str, default: Any = None) -> Any:

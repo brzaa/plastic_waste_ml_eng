@@ -268,7 +268,7 @@ class BottleCapTrainer:
             Path to quantized INT8 model
         """
         try:
-            from onnxruntime.quantization import quantize_dynamic, QuantType
+            from onnxruntime.quantization import QuantType, quantize_dynamic
         except ImportError:
             logger.error("onnxruntime not installed. Skipping quantization.")
             return onnx_path
