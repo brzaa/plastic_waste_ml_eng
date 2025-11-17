@@ -1,0 +1,21 @@
+# Core ML/CV dependencies
+ultralytics>=8.3.0
+opencv-python-headless>=4.10.0
+numpy>=1.26.0
+pillow>=10.0.0
+pyyaml>=6.0
+
+# ONNX Runtime for optimized inference
+onnxruntime>=1.19.0
+onnx>=1.16.0
+
+# MLOps and experiment tracking
+wandb>=0.18.0
+
+# CLI framework
+typer[all]>=0.12.0
+rich>=13.7.0
+
+# Utilities
+tqdm>=4.66.0
+scikit-learn>=1.5.0
