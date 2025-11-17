@@ -581,3 +581,28 @@ MIT License - See [LICENSE](LICENSE) file for details
 ---
 
 **Built with ❤️ for real-time edge AI**
+
+---
+
+## Building on Mac Silicon (Apple M-series)
+
+**Mac Silicon users have a significant advantage** - you can build ARM64 Docker images natively without QEMU emulation:
+
+```bash
+# Native ARM64 build (1-3 minutes on Mac Silicon)
+docker build -t bsort:latest .
+
+# Test the image
+docker run --rm bsort:latest bsort --version
+
+# Run with camera (if you have a webcam)
+docker run --rm --device /dev/video0 -it bsort:latest bsort infer
+```
+
+**Performance Comparison**:
+- **Mac Silicon**: 1-3 minutes (native ARM64)
+- **GitHub Actions** (x86 + QEMU): 10-25 minutes
+- **Raspberry Pi 5**: 3-5 minutes (native ARM64)
+
+For development, **Mac Silicon is the fastest option** for building and testing Docker images.
+
